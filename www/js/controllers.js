@@ -23,7 +23,7 @@ angular.module('app.controllers', [])
   };
 
   $scope.switch = function(){
-    let temp = $scope.input.fromLength;
+    var temp = $scope.input.fromLength;
     $scope.input.fromLength = $scope.input.toLength;
     $scope.input.toLength = temp;
     var ratio = getRatio($scope.input.fromLength, $scope.input.toLength);
