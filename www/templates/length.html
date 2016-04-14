@@ -1,40 +1,54 @@
 <ion-view title="Length" id="page3">
     <ion-content padding="true" class="has-header">
         <form class="list">
-            <label class="item item-select" name="fromLength">
-                <span class="input-label">Select</span>
-                <select>
-                    <option>meter</option>
-                    <option>mile</option>
-                    <option>inch</option>
-                    <option>feet</option>
-                    <option>km</option>
-                </select>
-            </label>
-            <label class="item item-input">
-                <span class="input-label">from</span>
-                <input type="number" placeholder="">
-            </label>
-            <button id="length-button2" class="button button-positive  button-block icon ion-android-sync"></button>
-            <label class="item item-select" name="toLength">
-                <span class="input-label">Select</span>
-                <select>
-                    <option>USD</option>
-                    <option>HKD</option>
-                    <option>AUD</option>
-                    <option>RMB</option>
-                    <option>JPY</option>
-                </select>
-            </label>
-            <label class="item item-input">
-                <span class="input-label">to</span>
-                <input type="text" placeholder="">
-            </label>
+            <div class='row'>
+                <div class='col col-50'>
+                    <label class="item item-select" name="fromLength">
+
+                        <select ng-model='input.fromLength'>
+                            <option value='meter'>meter</option>
+                            <option value='mile'>mile</option>
+                            <option value='inch'>inch</option>
+                            <option value='yard'>yard</option>
+                            <option value='feet'>feet</option>
+                            <option value='km'>km</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="number" placeholder="0" ng-model='input.fromvalue' ng-keyup='convert()'>
+                    </label>
+                </div>
+            </div>
+            <button id="length-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch()'></button>
+            <div class='row'>
+                <div class='col col-50'>
+                    <label class="item item-select" name="toLength">
+
+                        <select ng-model='input.toLength'>
+                            <option value='meter'>meter</option>
+                            <option value='mile'>mile</option>
+                            <option value='inch'>inch</option>
+                            <option value='yard'>yard</option>
+                            <option value='feet'>feet</option>
+                            <option value='km'>km</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
+                    </label>
+                </div>
+            </div>
         </form>
-        <h1 id="length-heading1" style="color:#000000;">Heading</h1>
+        <h1 align='center' id="length-heading1" style="color:#000000;">Tip</h1>
         <div id="length-markdown2" style="color:#000000;">
-            <p>Some friendly
-                <strong>markdown</strong>
+            <p>
+                The metre was originally defined in 1793 as one ten-millionth of the distance from the equator to the North Pole. In 1889, it was redefined in terms of a prototype metre bar (the actual bar used was subsequently changed twice). In 1960, the metre was redefined in terms of a certain number of wavelengths of a certain emission line of krypton-86. In 1983, the current definition was adopted.
+
+                The imperial inch is defined as 0.0254 metres (2.54 centimetres or 25.4 millimetres). One metre is about 3 3⁄8 inches longer than a yard, i.e. about 39 3⁄8 inches.
             </p>
         </div>
     </ion-content>
