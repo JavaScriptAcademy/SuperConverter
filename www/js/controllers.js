@@ -1,6 +1,44 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['app.services'])
 
-.controller('currencyCtrl', function($scope) {
+.controller('currencyCtrl', function($scope, CurrencyService) {
+  $scope.input={
+    fromname : '',
+    toname : '',
+    fromvalue : 0,
+    tovalue : 0
+  };
+
+  var ratios = CurrencyService.getRatios(setNames);
+  var tips = {};
+
+  function setNames(rates){
+    ratios = rates;
+    $scope.names = Object.keys(rates);
+  }
+
+  $scope.switch = function(){
+    var temp = $scope.input.fromname;
+    $scope.input.fromname = $scope.input.toname;
+    $scope.input.toname = temp;
+    var ratio = getRatio($scope.input.fromname, $scope.input.toname);
+    $scope.input.tovalue = ratio * $scope.input.fromvalue;
+  };
+
+  $scope.convert = function(){
+    var ratio = getRatio($scope.input.fromname, $scope.input.toname);
+    $scope.input.tovalue = ratio * $scope.input.fromvalue;
+  };
+
+  $scope.convertAndShow = function(){
+    var ratio = getRatio($scope.input.fromname, $scope.input.toname);
+    $scope.input.tovalue = ratio * $scope.input.fromvalue;
+    $scope.tip = tips[$scope.input.fromname];
+  };
+
+
+  function getRatio(from, to){
+      return  ratios[to] / ratios[from];
+  }
 
 })
 
