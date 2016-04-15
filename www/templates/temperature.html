@@ -3,40 +3,39 @@
         <form class="list" id="temperatureConverter">
             <div class='row'>
                 <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="number" placeholder="0" ng-model='input.fromvalue' ng-keyup='convertAndShow()' min=0>
+                    </label>
+                </div>
+                <div class='col col-50'>
                     <label class="item item-select" name="fromTemperature">
 
                         <select ng-model='input.fromname' ng-change='convertAndShow()'>
                             <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
-
                         </select>
-                    </label>
-                </div>
-                <div class='col col-50'>
-                    <label class="item item-input">
-                        <input type="number" placeholder="0" ng-model='input.fromvalue' ng-keyup='convert()' min=0>
                     </label>
                 </div>
             </div>
             <button id="length-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch()'></button>
             <div class='row'>
                 <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
+                    </label>
+                </div>
+                <div class='col col-50'>
                     <label class="item item-select" name="toTemperature">
-
                         <select ng-model='input.toname' ng-change='convert()'>
                             <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
                         </select>
                     </label>
                 </div>
-                <div class='col col-50'>
-                    <label class="item item-input">
-                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
-                    </label>
-                </div>
             </div>
         </form>
-        <h1 id="temperature-heading3" style="color:#000000;">Tip</h1>
+        <h1 id="temperature-heading3" style="color:#000000;" align="center">Tip</h1>
         <div id="temperature-markdown4" style="color:#000000;">
-            <p>{{tip}}
+            <p>
+                {{tip}}
             </p>
         </div>
     </ion-content>
