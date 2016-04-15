@@ -5,13 +5,9 @@
                 <div class='col col-50'>
                     <label class="item item-select" name="fromLength">
 
-                        <select ng-model='input.fromLength' ng-change='convert()'>
-                            <option value='meter'>meter</option>
-                            <option value='mile'>mile</option>
-                            <option value='inch'>inch</option>
-                            <option value='yard'>yard</option>
-                            <option value='feet'>feet</option>
-                            <option value='km'>km</option>
+                        <select ng-model='input.fromname' ng-change='convertAndShow()'>
+                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
+
                         </select>
                     </label>
                 </div>
@@ -26,13 +22,8 @@
                 <div class='col col-50'>
                     <label class="item item-select" name="toLength">
 
-                        <select ng-model='input.toLength' ng-change='convert()'>
-                            <option value='meter'>meter</option>
-                            <option value='mile'>mile</option>
-                            <option value='inch'>inch</option>
-                            <option value='yard'>yard</option>
-                            <option value='feet'>feet</option>
-                            <option value='km'>km</option>
+                        <select ng-model='input.toname' ng-change='convert()'>
+                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
                         </select>
                     </label>
                 </div>
@@ -46,9 +37,7 @@
         <h1 align='center' id="length-heading1" style="color:#000000;">Tip</h1>
         <div id="length-markdown2" style="color:#000000;">
             <p>
-                The metre was originally defined in 1793 as one ten-millionth of the distance from the equator to the North Pole. In 1889, it was redefined in terms of a prototype metre bar (the actual bar used was subsequently changed twice). In 1960, the metre was redefined in terms of a certain number of wavelengths of a certain emission line of krypton-86. In 1983, the current definition was adopted.
-
-                The imperial inch is defined as 0.0254 metres (2.54 centimetres or 25.4 millimetres). One metre is about 3 3⁄8 inches longer than a yard, i.e. about 39 3⁄8 inches.
+               {{tip}}
             </p>
         </div>
     </ion-content>
