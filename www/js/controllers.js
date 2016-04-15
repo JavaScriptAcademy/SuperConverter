@@ -7,8 +7,8 @@ angular.module('app.controllers', [])
 .controller('lengthCtrl', function($scope) {
 
   $scope.input={
-    fromname : 'meter',
-    toname : 'km',
+    fromname : '',
+    toname : '',
     fromvalue : 0,
     tovalue : 0
   };
