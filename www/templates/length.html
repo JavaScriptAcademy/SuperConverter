@@ -3,6 +3,11 @@
         <form class="list">
             <div class='row'>
                 <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="number" placeholder="0" ng-model='input.fromvalue' ng-keyup='convert()' min=0>
+                    </label>
+                </div>
+                <div class='col col-50'>
                     <label class="item item-select" name="fromLength">
 
                         <select ng-model='input.fromname' ng-change='convertAndShow()'>
@@ -11,25 +16,20 @@
                         </select>
                     </label>
                 </div>
-                <div class='col col-50'>
-                    <label class="item item-input">
-                        <input type="number" placeholder="0" ng-model='input.fromvalue' ng-keyup='convert()' min=0>
-                    </label>
-                </div>
             </div>
             <button id="length-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch()'></button>
             <div class='row'>
+                <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
+                    </label>
+                </div>
                 <div class='col col-50'>
                     <label class="item item-select" name="toLength">
 
                         <select ng-model='input.toname' ng-change='convert()'>
                             <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
                         </select>
-                    </label>
-                </div>
-                <div class='col col-50'>
-                    <label class="item item-input">
-                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
                     </label>
                 </div>
             </div>
