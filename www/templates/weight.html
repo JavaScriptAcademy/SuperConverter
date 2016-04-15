@@ -1,43 +1,47 @@
 <ion-view title="Weight" id="page4">
     <ion-content padding="true" class="has-header">
         <form class="list">
-            <label class="item item-select" name="fromWeight">
-                <span class="input-label">Select</span>
-                <select>
-                    <option>g</option>
-                    <option>kg</option>
-                    <option>pound</option>
-                    <option>ounce</option>
-                    <option>ton</option>
-                </select>
-            </label>
-            <label class="item item-input">
-                <span class="input-label">from</span>
-                <input type="text" placeholder="">
-            </label>
+            <div class='row'>
+                <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="number" placeholder="0" ng-model='input.fromvalue' ng-keyup='convert()' min=0>
+                    </label>
+                </div>
+                <div class='col col-50'>
+                    <label class="item item-select" name="fromWeight">
+
+                        <select ng-model='input.fromname' ng-change='convertAndShow()'>
+                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
+
+                        </select>
+                    </label>
+                </div>
+                
+            </div>
+            <button id="weight-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch()'></button>
+            <div class='row'>
+                <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
+                    </label>
+                </div>
+                <div class='col col-50'>
+                    <label class="item item-select" name="toWeight">
+
+                        <select ng-model='input.toname' ng-change='convert()'>
+                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
         </form>
-        <button id="weight-button3" class="button button-positive  button-block icon ion-android-sync"></button>
-        <form class="list">
-            <label class="item item-select" name="toWeight">
-                <span class="input-label">Select</span>
-                <select>
-                    <option>g</option>
-                    <option>kg</option>
-                    <option>ton</option>
-                    <option>pound</option>
-                    <option>ounce</option>
-                </select>
-            </label>
-            <label class="item item-input">
-                <span class="input-label">to</span>
-                <input type="text" placeholder="">
-            </label>
-        </form>
-        <h1 id="weight-heading2" style="color:#000000;">Heading</h1>
-        <div id="weight-markdown3" style="color:#000000;">
-            <p>Some friendly
-                <strong>markdown</strong>
+        <h1 align='center' id="weight-heading1" style="color:#000000;">PIC</h1>
+        <div id="weight-markdown2" style="color:#000000;">
+            <p>
+            <img src="http://img.foodnetwork.com/FOOD/2013/01/07/HE_weight-loss-pills-scale-thinkstock_s4x3_lg.jpg" width="360">
             </p>
         </div>
     </ion-content>
 </ion-view>
+
+
