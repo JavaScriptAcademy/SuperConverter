@@ -1,40 +1,42 @@
-<ion-view title="Temperature" id="page6">
-    <ion-content padding="true" class="has-header">
-        <form class="list">
-            <label class="item item-select" name="fromTemperature">
-                <span class="input-label">Select</span>
-                <select>
-                    <option>CELSIUS EQUALS</option>
-                    <option>FAHENHEIT EQUALS</option>
-                    <option>KELVIN EQUALS</option>
-                    <option>RANKINE EQUALS</option>
-                    <option>REAUMUR EQUALS</option>
-                </select>
-            </label>
-            <label class="item item-input">
-                <span class="input-label">from</span>
-                <input type="text" placeholder="">
-            </label>
-            <button id="temperature-button4" class="button button-positive  button-block icon ion-android-sync"></button>
-            <label class="item item-select" name="toTemperature">
-                <span class="input-label">Select</span>
-                <select>
-                    <option>CELSIUS EQUALS</option>
-                    <option>FAHENHEIT EQUALS</option>
-                    <option>KELVIN EQUALS</option>
-                    <option>RANKINE EQUALS</option>
-                    <option>REAUMUR EQUALS</option>
-                </select>
-            </label>
-            <label class="item item-input">
-                <span class="input-label">to</span>
-                <input type="text" placeholder="">
-            </label>
+<ion-view title="Temperature" id="temperature">
+    <ion-content padding="true" class="has-header" ng-controller="temperatureCtrl">
+        <form class="list" id="temperatureConverter">
+            <div class='row'>
+                <div class='col col-50'>
+                    <label class="item item-select" name="fromTemperature">
+
+                        <select ng-model='input.fromname' ng-change='convertAndShow()'>
+                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
+
+                        </select>
+                    </label>
+                </div>
+                <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="number" placeholder="0" ng-model='input.fromvalue' ng-keyup='convert()' min=0>
+                    </label>
+                </div>
+            </div>
+            <button id="length-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch()'></button>
+            <div class='row'>
+                <div class='col col-50'>
+                    <label class="item item-select" name="toTemperature">
+
+                        <select ng-model='input.toname' ng-change='convert()'>
+                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
+                        </select>
+                    </label>
+                </div>
+                <div class='col col-50'>
+                    <label class="item item-input">
+                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
+                    </label>
+                </div>
+            </div>
         </form>
-        <h1 id="temperature-heading3" style="color:#000000;">Heading</h1>
+        <h1 id="temperature-heading3" style="color:#000000;">Tip</h1>
         <div id="temperature-markdown4" style="color:#000000;">
-            <p>Some friendly
-                <strong>markdown</strong>
+            <p>{{tip}}
             </p>
         </div>
     </ion-content>
