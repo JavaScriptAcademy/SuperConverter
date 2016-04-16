@@ -33,13 +33,16 @@ angular.module('app.controllers', ['app.services'])
     var ratio = getRatio($scope.input.fromname, $scope.input.toname);
     $scope.input.tovalue = ratio * $scope.input.fromvalue;
     $scope.tip = tips[$scope.input.fromname];
+    if(from && to){
+      CurrencyService.getHistoricData(from, to, drawChart);
+    }
   };
 
 
   function getRatio(from, to){
-      return  ratios[to] / ratios[from];
-  }
 
+    return  ratios[to] / ratios[from];
+  }
 })
 
 .controller('lengthCtrl', function($scope) {
