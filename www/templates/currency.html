@@ -27,18 +27,16 @@
                 <div class='col col-50'>
                     <label class="item item-select" name="toLength">
 
-                        <select ng-model='input.toname' ng-change='convert()'>
+                        <select ng-model='input.toname' ng-change='convertAndShow()'>
                             <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
                         </select>
                     </label>
                 </div>
             </div>
         </form>
-        <h1 align='center' id="length-heading1" style="color:#000000;">Tip</h1>
+        <h1 align='center' id="length-heading1" style="color:#000000;">Chart</h1>
         <div id="length-markdown2" style="color:#000000;">
-            <p>
-               {{tip}}
-            </p>
+            <nvd3 options="options" data="data"></nvd3>
         </div>
     </ion-content>
 </ion-view>
