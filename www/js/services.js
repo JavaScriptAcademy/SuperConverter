@@ -9,7 +9,7 @@ angular.module('app.services', [])
 
 }])
 
-.factory('CurrencyService',['$http',function($http){
+.factory('CurrencyService',['$http', function($http){
   return {
     getRatios: function(callback){
       $http({
@@ -31,26 +31,28 @@ angular.module('app.services', [])
       });
     },
 
-    getHistoricData: function(from, to/*, callback*/){
+    getHistoricData: function(from, to, callback){
       let date = new Date();
-      let historyData = {};
+      let historyData = [];
       for(let i = 0; i < 30; i++){
 
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
         let dateString = year+'-'+month+'-'+day;
-        // console.log('this is i: ',i)
+       
         $http({
           method: 'GET',
           url: 'http://api.fixer.io/latest?base='+from+'&symbols='+to+'&date='+dateString
         }).then(function successCallback(response) {
-          //console.log('this is i:',i,'this is response',response)
-            historyData[dateString] = response.data.rates[to];
-            // console.log('this is i:',i)
+
+            let ob = {x : new Date(dateString).getTime(), y : response.data.rates[to]};
+            historyData.push(ob);
+            
             if(i == 29){
-              // callback(historyData);
-              return historyData;
+
+              callback(historyData);
+              
             }
 
             // this callback will be called asynchronously
