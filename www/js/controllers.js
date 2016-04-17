@@ -79,9 +79,9 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                 height: 450,
                 margin : {
                     top: 20,
-                    right: 20,
+                    right: 50,
                     bottom: 50,
-                    left: 55
+                    left: 70
                 },
                 x: function(d){ return d.x; },
                 y: function(d){ return d.y; },
