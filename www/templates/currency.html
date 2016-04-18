@@ -37,10 +37,10 @@
                 </div>
             </div>
         </form>
-        <div class="card">
-          <div class="item item-text-wrap ">
+        <div class="card" ng-show='input.fromname && input.toname'>
+          <div class="item item-text-wrap">
 
-            <nvd3 options="options" data="data" ng-show='input.fromname && input.toname'></nvd3>
+            <nvd3 options="options" data="data"></nvd3>
           </div>
         </div>
     </ion-content>

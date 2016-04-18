@@ -32,10 +32,10 @@
                 </div>
             </div>
         </form>
-        <div class="card">
+        <div class="card" ng-show='input.fromname'>
             <h1 id="temperature-heading3" style="color:#000000;" align="center">{{input.fromname}}</h1>
             <div id="temperature-markdown4" style="color:#000000;">
-                <p ng-show='input.fromname'>
+                <p>
                     {{tip}}
                 </p>
             </div>
