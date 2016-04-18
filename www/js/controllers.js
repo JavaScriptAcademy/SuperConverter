@@ -47,7 +47,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
   };
 
   $scope.convertAndShow = function(){
-    
+
     var ratio = getRatio($scope.input.fromname, $scope.input.toname);
     $scope.input.tovalue = ratio * $scope.input.fromvalue;
     if($scope.input.fromname && $scope.input.toname){
@@ -70,12 +70,14 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
   }
 
   function drawChart(data){
-    
-    var key = $scope.input.fromname + $scope.input.toname; 
-    $scope.data = [{values: data.sort(sortBy("x")), key: key, color: "blue"}];
+    var max = data.sort(sortBy("y"))[data.length-1].y;
+    var min = data.sort(sortBy("y"))[0].y;
+
+    var key = $scope.input.fromname + $scope.input.toname;
+    $scope.data = [{values: data.sort(sortBy("x")), key: key, color: "rgba(34, 177, 58, 0.66)"}];
     $scope.options = {
             chart: {
-                type: 'lineChart',
+                type: 'stackedAreaChart',
                 height: 450,
                 margin : {
                     top: 20,
@@ -85,6 +87,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                 },
                 x: function(d){ return d.x; },
                 y: function(d){ return d.y; },
+                yDomain: [min, max],
                 useInteractiveGuideline: false,
                 dispatch: {
                     stateChange: function(e){ console.log("stateChange"); },
@@ -106,7 +109,8 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                         return d3.format('.06f')(d);
                     },
                     axisLabelDistance: -10
-                },  
+
+                },
                 callback: function(chart){
                     console.log("!!! lineChart callback !!!");
                 }

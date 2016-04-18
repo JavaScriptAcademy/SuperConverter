@@ -5,3 +5,25 @@
 .bar.bar-stable .title{
   color:white;
 }
+
+.item-select select{
+  max-width: 100%;
+}
+
+.col label.item.item-select{
+    box-sizing: border-box;
+    height: 63px;
+    /* width: 100%; */
+    position: relative;
+    vertical-align: top;
+}
+.col label input{
+
+    box-sizing: border-box;
+    height: 50px;
+    vertical-align: top;
+
+}
+.nv-controlsWrap.nvd3-svg{
+  display:none;
+}
