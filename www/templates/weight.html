@@ -16,13 +16,13 @@
                         </select>
                     </label>
                 </div>
-                
+
             </div>
             <button id="weight-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch()'></button>
             <div class='row'>
                 <div class='col col-50'>
                     <label class="item item-input">
-                        <input type="text" placeholder="0" ng-model='input.tovalue' disabled>
+                        <input type="number" placeholder="0" ng-model='input.tovalue' disabled>
                     </label>
                 </div>
                 <div class='col col-50'>
@@ -35,11 +35,13 @@
                 </div>
             </div>
         </form>
-        <h1 align='center' id="weight-heading1" style="color:#000000;">PIC</h1>
-        <div id="weight-markdown2" style="color:#000000;">
-            <p>
-            <img src="http://img.foodnetwork.com/FOOD/2013/01/07/HE_weight-loss-pills-scale-thinkstock_s4x3_lg.jpg" width="360">
-            </p>
+        <div class="card">
+            <h1 id="temperature-heading3" style="color:#000000;" align="center">{{input.fromname}}</h1>
+            <div id="temperature-markdown4" style="color:#000000;">
+                <p>
+                    {{tip}}
+                </p>
+            </div>
         </div>
     </ion-content>
 </ion-view>
