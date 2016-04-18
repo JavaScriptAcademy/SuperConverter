@@ -77,7 +77,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     var max = data.sort(sortBy("y"))[data.length-1].y;
     var min = data.sort(sortBy("y"))[0].y;
 
-    var key = $scope.input.fromname + $scope.input.toname;
+    var key = $scope.input.fromname +'-'+ $scope.input.toname;
     $scope.data = [{values: data.sort(sortBy("x")), key: key, color: "rgba(34, 177, 58, 0.66)"}];
     $scope.options = {
             chart: {
@@ -226,6 +226,13 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
   	ounce : 0.035274,
   	ton : 0.00001,
   };
+  var tips = {
+   g : "The word gramme was adopted by the French National Convention in its 1795 decree revising the metric system as replacing the gravet introduced in 1793. Its definition remained that of the weight (poids) of a cubic centimetre of water.",
+   kg : "The word kilogramme or kilogram is derived from the French kilogramme,[6] which itself was a learned coinage, prefixing the Greek stem of χίλιοι khilioi \"a thousand\" to gramma, a Late Latin term for \"a small weight\", itself from Greek γράμμα.",
+   pound : "The unit is descended from the Roman libra (hence the abbreviation \"lb\"); the name pound is a Germanic adaptation of the Latin phrase libra pondo, 'a pound weight'.",
+   ounce : "The obsolete apothecaries' ounce(abbreviated ℥) equivalent to the troy ounce, was formerly used by apothecaries. \"Maria Theresa ounce\" was once introduced in Ethiopia and some European countries, which was equal to the weight of one Maria Theresa thaler, or 28.0668 g.Both the weight and the value are the definition of one birr, still in use in present-day Ethiopia and formerly in Eritrea.",
+   ton : "Ton is also used informally, often as slang, to mean a large amount of something, material or not. For example, \"I have a ton of homework to do this weekend.\"",
+ };
 
   $scope.names = Object.keys(ratios);
 
