@@ -3,8 +3,8 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
 .controller('currencyCtrl', function($scope, CurrencyService, $ionicLoading) {
 
   $scope.input={
-    fromname : '',
-    toname : '',
+    fromname : null,
+    toname : null,
     fromvalue : 0,
     tovalue : 0
   };
@@ -26,6 +26,8 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     var temp = $scope.input.fromname;
     $scope.input.fromname = $scope.input.toname;
     $scope.input.toname = temp;
+    $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
+    $scope.flagtoname = $scope.input.toname.substring(0, 2).toLowerCase();
     var ratio = getRatio($scope.input.fromname, $scope.input.toname);
     $scope.input.tovalue = ratio * $scope.input.fromvalue;
     if($scope.input.fromname && $scope.input.toname){

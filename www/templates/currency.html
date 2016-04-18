@@ -11,7 +11,7 @@
                     <label class="item item-select" name="fromLength">
                         <span class="flag-icon flag-icon-{{flagfromname}} flag-icon-squared"></span>
                         <select ng-model='input.fromname' ng-change='convertAndShow()'>
-                            <option ng-repeat='name in names' value="{{name}}">
+                            <option ng-repeat="name in names | filter: '!' + input.toname" value="{{name}}">
                                 {{name}}
                             </option>
                         </select>
@@ -29,7 +29,7 @@
                     <label class="item item-select" name="toLength">
                     <span class="flag-icon flag-icon-{{flagtoname}} flag-icon-squared"></span>
                         <select ng-model='input.toname' ng-change='convertAndShow()'>
-                            <option ng-repeat='name in names' value="{{name}}">
+                            <option ng-repeat="name in names | filter: '!' + input.fromname" value="{{name}}">
                                 {{name}}
                             </option>
                         </select>
@@ -39,7 +39,8 @@
         </form>
         <div class="card">
           <div class="item item-text-wrap ">
-            <nvd3 options="options" data="data"></nvd3>
+
+            <nvd3 options="options" data="data" ng-show='input.fromname && input.toname'></nvd3>
           </div>
         </div>
     </ion-content>
