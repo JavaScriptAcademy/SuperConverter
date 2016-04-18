@@ -19,7 +19,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
 
   function setNames(rates){
     ratios = rates;
-    $scope.names = Object.keys(rates);
+    $scope.names =Object.keys(rates);
   }
 
   $scope.switch = function(){
@@ -49,6 +49,8 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
   $scope.convertAndShow = function(){
 
     var ratio = getRatio($scope.input.fromname, $scope.input.toname);
+    $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
+    $scope.flagtoname = $scope.input.toname.substring(0, 2).toLowerCase();
     $scope.input.tovalue = ratio * $scope.input.fromvalue;
     if($scope.input.fromname && $scope.input.toname){
       $ionicLoading.show({

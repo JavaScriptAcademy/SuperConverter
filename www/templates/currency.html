@@ -9,10 +9,11 @@
                 </div>
                 <div class='col col-50'>
                     <label class="item item-select" name="fromLength">
-
+                        <span class="flag-icon flag-icon-{{flagfromname}} flag-icon-squared"></span>
                         <select ng-model='input.fromname' ng-change='convertAndShow()'>
-                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
-
+                            <option ng-repeat='name in names' value="{{name}}">
+                                {{name}}
+                            </option>
                         </select>
                     </label>
                 </div>
@@ -26,16 +27,18 @@
                 </div>
                 <div class='col col-50'>
                     <label class="item item-select" name="toLength">
-
+                    <span class="flag-icon flag-icon-{{flagtoname}} flag-icon-squared"></span>
                         <select ng-model='input.toname' ng-change='convertAndShow()'>
-                            <option ng-repeat='name in names' value="{{name}}">{{name}}</option>
+                            <option ng-repeat='name in names' value="{{name}}">
+                                {{name}}
+                            </option>
                         </select>
                     </label>
                 </div>
             </div>
         </form>
         <div class="card">
-          <div class="item item-text-wrap">
+          <div class="item item-text-wrap ">
             <nvd3 options="options" data="data"></nvd3>
           </div>
         </div>
