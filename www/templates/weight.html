@@ -35,12 +35,38 @@
                 </div>
             </div>
         </form>
+
+
+
         <h1 align='center' id="weight-heading1" style="color:#000000;">{{input.fromname}}</h1>
         <div id="weight-markdown2" style="color:#000000;">
             <p>
             {{tip}}
             </p>
         </div>
+
+
+
+        <div class="form-group">
+    <label class="control-label">Destination</label>
+    <input type="text" name="cdCountry" class="form-control" required />
+</div>
+
+<script>
+    $("[name='cdCountry']").select2({
+        placeholder: "Select a country",
+        formatResult: function (country) {
+            return $(
+              "<span><i class=\"flag flag-" + country.id.toLowerCase() + "\"></i> " + country.text + "</span>"
+            );;
+        },
+        data: yourDataSource
+    });
+</script>
+
+
+
+
     </ion-content>
 </ion-view>
 
