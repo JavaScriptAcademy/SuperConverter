@@ -1,7 +1,6 @@
 angular.module('app.controllers', ['nvd3', 'app.services'])
 
 .controller('currencyCtrl', function($scope, CurrencyService, $ionicLoading) {
-
   $scope.input={
     fromname : null,
     toname : null,
@@ -22,7 +21,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     $scope.names =Object.keys(rates);
   }
 
-  $scope.switch = function(){
+  $scope.switch = function(period){
     var temp = $scope.input.fromname;
     $scope.input.fromname = $scope.input.toname;
     $scope.input.toname = temp;
@@ -38,7 +37,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
         maxWidth: 200,
         showDelay: 0
       });
-      CurrencyService.getHistoricData($scope.input.fromname, $scope.input.toname, drawChart);
+      CurrencyService.getHistoricData(period, $scope.input.fromname, $scope.input.toname, drawChart);
 
     }
   };
@@ -49,7 +48,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
   };
 
   $scope.convertAndShow = function(period){
-
+    $scope.period = period;
     var ratio = getRatio($scope.input.fromname, $scope.input.toname);
     $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
     $scope.flagtoname = $scope.input.toname.substring(0, 2).toLowerCase();
