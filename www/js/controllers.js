@@ -77,7 +77,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     var max = data.sort(sortBy("y"))[data.length-1].y;
     var min = data.sort(sortBy("y"))[0].y;
 
-    var key = $scope.input.fromname + $scope.input.toname;
+    var key = $scope.input.fromname +'-'+ $scope.input.toname;
     $scope.data = [{values: data.sort(sortBy("x")), key: key, color: "rgba(34, 177, 58, 0.66)"}];
     $scope.options = {
             chart: {
@@ -232,7 +232,9 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
    pound : "The unit is descended from the Roman libra (hence the abbreviation \"lb\"); the name pound is a Germanic adaptation of the Latin phrase libra pondo, 'a pound weight'.",
    ounce : "The obsolete apothecaries' ounce(abbreviated ℥) equivalent to the troy ounce, was formerly used by apothecaries. \"Maria Theresa ounce\" was once introduced in Ethiopia and some European countries, which was equal to the weight of one Maria Theresa thaler, or 28.0668 g.Both the weight and the value are the definition of one birr, still in use in present-day Ethiopia and formerly in Eritrea.",
    ton : "Ton is also used informally, often as slang, to mean a large amount of something, material or not. For example, \"I have a ton of homework to do this weekend.\"",
-  };
+
+ };
+
   $scope.names = Object.keys(ratios);
 
   $scope.switch = function(){
