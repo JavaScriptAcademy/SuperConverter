@@ -80,7 +80,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     $scope.data = [{values: data.sort(sortBy("x")), key: key, color: "rgba(34, 177, 58, 0.66)"}];
     $scope.options = {
             chart: {
-                type: 'stackedAreaChart',
+                type: 'lineChart',
                 height: 450,
                 margin : {
                     top: 20,
@@ -98,6 +98,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                     tooltipShow: function(e){ console.log("tooltipShow"); },
                     tooltipHide: function(e){ console.log("tooltipHide"); }
                 },
+                duration:1000,
                 xAxis: {
                     axisLabel: '',
                     tickFormat: function(d){
@@ -105,7 +106,8 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                     },
                     rotateLabels: 60,
                     showMaxMin: false,
-                    axisLabelDistance: 0
+                    axisLabelDistance: 0,
+                    staggerLabels: true
                 },
                 yAxis: {
                     axisLabel: '',
