@@ -10,7 +10,7 @@
                 <div class='col col-50'>
                     <label class="item item-select" name="fromLength">
                         <span class="flag-icon flag-icon-{{flagfromname}} flag-icon-squared"></span>
-                        <select ng-model='input.fromname' ng-change='convertAndShow()'>
+                        <select ng-model='input.fromname' ng-change='convertAndShow(7)'>
                             <option ng-repeat="name in names | filter: '!' + input.toname" value="{{name}}">
                                 {{name}}
                             </option>
@@ -28,7 +28,7 @@
                 <div class='col col-50'>
                     <label class="item item-select" name="toLength">
                     <span class="flag-icon flag-icon-{{flagtoname}} flag-icon-squared"></span>
-                        <select ng-model='input.toname' ng-change='convertAndShow()'>
+                        <select ng-model='input.toname' ng-change='convertAndShow(7)'>
                             <option ng-repeat="name in names | filter: '!' + input.fromname" value="{{name}}">
                                 {{name}}
                             </option>
@@ -38,8 +38,12 @@
             </div>
         </form>
         <div class="card" ng-show='input.fromname && input.toname'>
+          <div class="row">
+            <ion-radio class="col col-33" ng-click="convertAndShow(7)">7 Days</ion-radio>
+            <ion-radio class="col col-33" ng-click="convertAndShow(30)">30 Days</ion-radio>
+            <ion-radio class="col col-33" ng-click="convertAndShow(90)">3 Months</ion-radio>
+          </div>
           <div class="item item-text-wrap">
-
             <nvd3 options="options" data="data"></nvd3>
           </div>
         </div>

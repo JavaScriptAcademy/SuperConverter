@@ -48,7 +48,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     $scope.input.tovalue = ratio * $scope.input.fromvalue;
   };
 
-  $scope.convertAndShow = function(){
+  $scope.convertAndShow = function(period){
 
     var ratio = getRatio($scope.input.fromname, $scope.input.toname);
     $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
@@ -62,7 +62,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
         maxWidth: 200,
         showDelay: 0
       });
-      CurrencyService.getHistoricData($scope.input.fromname, $scope.input.toname, drawChart);
+      CurrencyService.getHistoricData(period, $scope.input.fromname, $scope.input.toname, drawChart);
 
     }
   };
@@ -73,7 +73,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     return  ratios[to] / ratios[from];
   }
 
-  function drawChart(data){
+  function drawChart(period, data){
     var max = data.sort(sortBy("y"))[data.length-1].y;
     var min = data.sort(sortBy("y"))[0].y;
 
@@ -86,7 +86,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                 margin : {
                     top: 20,
                     right: 50,
-                    bottom: 50,
+                    bottom: 100,
                     left: 70
                 },
                 x: function(d){ return d.x; },
@@ -104,8 +104,9 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                     tickFormat: function(d){
                         return d3.time.format('%x')(new Date(d));
                     },
-                    rotateLabels: 10,
-                    showMaxMin: false
+                    rotateLabels: 60,
+                    showMaxMin: false,
+                    axisLabelDistance: 0
                 },
                 yAxis: {
                     axisLabel: '',
@@ -121,7 +122,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
             },
             title: {
                 enable: true,
-                text: 'Past 30 Days Rates'
+                text: 'Past '+ period +' Days Rates'
             },
             subtitle: {
                 enable: false,

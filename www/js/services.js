@@ -31,16 +31,16 @@ angular.module('app.services', [])
       });
     },
 
-    getHistoricData: function(from, to, callback){
+    getHistoricData: function(period, from, to, callback){
       let date = new Date();
       let historyData = [];
-      for(let i = 0; i < 30; i++){
+      for(let i = 0; i < period; i++){
 
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
         let dateString = year+'-'+month+'-'+day;
-       
+
         $http({
           method: 'GET',
           url: 'http://api.fixer.io/latest?base='+from+'&symbols='+to+'&date='+dateString
@@ -48,11 +48,11 @@ angular.module('app.services', [])
 
             let ob = {x : new Date(dateString).getTime(), y : response.data.rates[to]};
             historyData.push(ob);
-            
-            if(i == 29){
 
-              callback(historyData);
-              
+            if(i == period - 1){
+
+              callback(period, historyData);
+
             }
 
             // this callback will be called asynchronously
