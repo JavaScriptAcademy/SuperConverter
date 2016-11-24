@@ -1,7 +1,15 @@
 angular.module('app.controllers', ['nvd3', 'app.services'])
 
 .controller('currencyCtrl', function($scope, CurrencyService, $ionicLoading) {
-  $scope.input={
+
+  var tips = {},
+      defaultPeriod = 7,
+      ratios;
+
+  showLoading();
+  initializeCurrency();
+
+  $scope.input = {
     fromname : null,
     toname : null,
     fromvalue : 0,
@@ -13,32 +21,20 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
   /* Chart data */
   $scope.data = { /* JSON data */ };
 
-  var ratios = CurrencyService.getRatios(setNames);
-  var tips = {};
-
-  function setNames(rates){
-    ratios = rates;
-    $scope.names =Object.keys(rates);
-  }
-
-  $scope.switch = function(period){
-    var temp = $scope.input.fromname;
-    $scope.input.fromname = $scope.input.toname;
-    $scope.input.toname = temp;
-    $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
-    $scope.flagtoname = $scope.input.toname.substring(0, 2).toLowerCase();
-    var ratio = getRatio($scope.input.fromname, $scope.input.toname);
-    $scope.input.tovalue = ratio * $scope.input.fromvalue;
+  $scope.switch = function(){
     if($scope.input.fromname && $scope.input.toname){
-      $ionicLoading.show({
-        content: 'Loading',
-        animation: 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay: 0
-      });
-      CurrencyService.getHistoricData(period, $scope.input.fromname, $scope.input.toname, drawChart);
+      var temp = $scope.input.fromname, ratio;
 
+      showLoading();
+
+      $scope.input.fromname = $scope.input.toname;
+      $scope.input.toname = temp;
+      $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
+      $scope.flagtoname = $scope.input.toname.substring(0, 2).toLowerCase();
+      ratio = getRatio($scope.input.fromname, $scope.input.toname);
+      $scope.input.tovalue = ratio * $scope.input.fromvalue;
+
+      loadChart(defaultPeriod);
     }
   };
 
@@ -48,35 +44,64 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
   };
 
   $scope.convertAndShow = function(period){
-    $scope.period = period;
-    var ratio = getRatio($scope.input.fromname, $scope.input.toname);
-    $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
-    $scope.flagtoname = $scope.input.toname.substring(0, 2).toLowerCase();
-    $scope.input.tovalue = ratio * $scope.input.fromvalue;
     if($scope.input.fromname && $scope.input.toname){
-      $ionicLoading.show({
+      var ratio = getRatio($scope.input.fromname, $scope.input.toname);
+
+      showLoading();
+
+      defaultPeriod = period ?　period : defaultPeriod;
+
+      $scope.flagfromname = $scope.input.fromname.substring(0, 2).toLowerCase();
+      $scope.flagtoname = $scope.input.toname.substring(0, 2).toLowerCase();
+      $scope.input.tovalue = ratio * $scope.input.fromvalue;
+
+      loadChart(defaultPeriod);
+    }
+  };
+
+  function setNames(rates){
+    ratios = rates;
+    $scope.names = Object.keys(rates);
+  }
+
+  function showLoading() {
+    $ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
         showDelay: 0
       });
-      CurrencyService.getHistoricData(period, $scope.input.fromname, $scope.input.toname, drawChart);
+  }
 
-    }
-  };
+  function initializeCurrency() {
+    CurrencyService.getRatios()
+      .then(function(rates){
+        rates.EUR = 1;
+        setNames(rates);
+        $ionicLoading.hide();
+    });
+  }
 
+  function loadChart(period) {
+    CurrencyService.getHistoricData(period, $scope.input.fromname, $scope.input.toname)
+    .then(function(data) {
+      drawChart(period, data);
+      $ionicLoading.hide();
+    });
+  }
 
   function getRatio(from, to){
 
-    return  ratios[to] / ratios[from];
+    return ratios[to] / ratios[from];
   }
 
   function drawChart(period, data){
-    var max = data.sort(sortBy("y"))[data.length-1].y;
-    var min = data.sort(sortBy("y"))[0].y;
+    var sortedData = data.sort(sortBy("y")),
+        max = sortedData[data.length-1].y,
+        min = sortedData[0].y,
+        key = $scope.input.fromname + '-' + $scope.input.toname;
 
-    var key = $scope.input.fromname +'-'+ $scope.input.toname;
     $scope.data = [{values: data.sort(sortBy("x")), key: key, color: "rgba(34, 177, 58, 0.66)"}];
     $scope.options = {
             chart: {
@@ -124,25 +149,8 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
             title: {
                 enable: true,
                 text: 'Past '+ period +' Days Rates'
-            },
-            subtitle: {
-                enable: false,
-                text: 'Subtitle for simple line chart. Lorem ipsum dolor sit amet, at eam blandit sadipscing, vim adhuc sanctus disputando ex, cu usu affert alienum urbanitas.',
-                css: {
-                    'text-align': 'center',
-                    'margin': '10px 13px 0px 7px'
-                }
-            },
-            caption: {
-                enable: false,
-                html: '<b>Figure 1.</b> Lorem ipsum dolor sit amet, at eam blandit sadipscing, <span style="text-decoration: underline;">vim adhuc sanctus disputando ex</span>, cu usu affert alienum urbanitas. <i>Cum in purto erat, mea ne nominavi persecuti reformidans.</i> Docendi blandit abhorreant ea has, minim tantas alterum pro eu. <span style="color: darkred;">Exerci graeci ad vix, elit tacimates ea duo</span>. Id mel eruditi fuisset. Stet vidit patrioque in pro, eum ex veri verterem abhorreant, id unum oportere intellegam nec<sup>[1, <a href="https://github.com/krispo/angular-nvd3" target="_blank">2</a>, 3]</sup>.',
-                css: {
-                    'text-align': 'justify',
-                    'margin': '10px 13px 0px 7px'
-                }
             }
         };
-    $ionicLoading.hide();
   }
 
   function sortBy(prop){

@@ -26,5 +26,5 @@
 - ionic build android --device (Git Bash)
 
 ####Run on IOS Device (through a Mac)
-- ionic platform add iod (Git Bash)
+- ionic platform add ios (Git Bash)
 - ionic build ios --device (Git Bash)

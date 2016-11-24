@@ -10,7 +10,7 @@
                 <div class='col col-50'>
                     <label class="item item-select" name="fromLength">
                         <span class="flag-icon flag-icon-{{flagfromname}} flag-icon-squared"></span>
-                        <select ng-model='input.fromname' ng-change='convertAndShow(7)'>
+                        <select ng-model='input.fromname' ng-change='convertAndShow()'>
                             <option ng-repeat="name in names | filter: '!' + input.toname" value="{{name}}">
                                 {{name}}
                             </option>
@@ -18,7 +18,7 @@
                     </label>
                 </div>
             </div>
-            <button id="length-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch(7)'></button>
+            <button id="length-button2" class="button button-positive  button-block icon ion-android-sync" ng-click='switch()'></button>
             <div class='row'>
                 <div class='col col-50'>
                     <label class="item item-input">
@@ -28,7 +28,7 @@
                 <div class='col col-50'>
                     <label class="item item-select" name="toLength">
                     <span class="flag-icon flag-icon-{{flagtoname}} flag-icon-squared"></span>
-                        <select ng-model='input.toname' ng-change='convertAndShow(7)'>
+                        <select ng-model='input.toname' ng-change='convertAndShow()'>
                             <option ng-repeat="name in names | filter: '!' + input.fromname" value="{{name}}">
                                 {{name}}
                             </option>
