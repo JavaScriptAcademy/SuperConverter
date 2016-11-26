@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['nvd3', 'app.services'])
 
-.controller('currencyCtrl', function($scope, CurrencyService, $ionicLoading) {
+.controller('currencyCtrl', function($scope, CurrencyService, $ionicLoading, $ionicPopup) {
 
   var tips = {},
       defaultPeriod = 7,
@@ -15,11 +15,6 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     fromvalue : 0,
     tovalue : 0
   };
-  /* Chart options */
-  $scope.options = { /* JSON data */ };
-
-  /* Chart data */
-  $scope.data = { /* JSON data */ };
 
   $scope.switch = function(){
     if($scope.input.fromname && $scope.input.toname){
@@ -76,10 +71,17 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
 
   function initializeCurrency() {
     CurrencyService.getRatios()
-      .then(function(rates){
+      .success(function(data){
+        var rates = data.rates;
         rates.EUR = 1;
         setNames(rates);
         $ionicLoading.hide();
+    }).error(function(error, header, config, status){
+        $ionicLoading.hide();
+        $ionicPopup.alert({
+          title: 'Opps',
+          template: 'App crashed, please try again later!'
+        });
     });
   }
 
@@ -106,7 +108,7 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
     $scope.options = {
             chart: {
                 type: 'lineChart',
-                height: 450,
+                height: 460,
                 margin : {
                     top: 20,
                     right: 70,
@@ -125,14 +127,11 @@ angular.module('app.controllers', ['nvd3', 'app.services'])
                 },
                 duration:1000,
                 xAxis: {
-                    axisLabel: '',
                     tickFormat: function(d){
                         return d3.time.format('%x')(new Date(d));
                     },
-                    rotateLabels: 60,
-                    showMaxMin: false,
-                    axisLabelDistance: 0,
-                    staggerLabels: true
+                    rotateLabels: -60,
+                    showMaxMin: true
                 },
                 yAxis: {
                     axisLabel: '',

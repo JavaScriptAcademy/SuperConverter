@@ -32,9 +32,7 @@ angular.module('app.services', [])
     getRatios: function(){
       return $http({
           method: 'GET',
-          url: 'https://api.fixer.io/latest'
-      }).then(function(response){
-        return response.data.rates;
+          url: 'http://api.fixer.io/latest'
       });
     },
 

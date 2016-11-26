@@ -23,7 +23,7 @@
 - Configure environment varibles for JDK and Android SKD
 - ionic platform add android (Git Bash)
 - connect you android device to your computer
-- ionic build android --device (Git Bash)
+- ionic run android (Git Bash)
 
 ####Run on IOS Device (through a Mac)
 - ionic platform add ios (Git Bash)
